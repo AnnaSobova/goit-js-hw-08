@@ -16,7 +16,6 @@ const makeGalleryItem = (arr) => {
         })
         .join('');
 };
-
     const galleryContainerRef = document.querySelector('.gallery');
     galleryContainerRef.innerHTML = makeGalleryItem(galleryItems);
 
