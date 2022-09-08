@@ -1,54 +1,34 @@
 
-import SimpleLightbox from "simplelightbox/dist/simple-lightbox.esm";  // Plain ES Module without Babel
+// import SimpleLightbox from "simplelightbox/dist/simple-lightbox.esm";  
+// Plain ES Module without Babel
+import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 // Add imports above this line
 import { galleryItems } from './gallery-items';
 // Change code below this line
-
-const makeGalleryItem= (arr) => {
+const makeGalleryItem = (arr) => {
     return arr
-        .map(({ description: descr, preview, original: orig }) => {
-            return `<div class="gallery__item">
-						<a class="gallery__link" href="large-image.jpg">
-							<img
-								class="gallery__image"
-								src="${preview}"
-								data-source="${orig}"
-								alt="${descr}"
-								/>
-						</a>
-					</div>`;
+        .map(({ description, preview, original }) => {
+            return `<a class="gallery__item" href="${original}">
+			<img class="gallery__image" src="${preview}" alt="" title="${description}" />
+		  </a>`;
         })
         .join('');
 };
 
-const galleryContainerRef = document.querySelector('.gallery');
-galleryContainerRef.innerHTML = makeGalleryItem(galleryItems);
+    const galleryContainerRef = document.querySelector('.gallery');
+    galleryContainerRef.innerHTML = makeGalleryItem(galleryItems);
 
-const createLightboxInstance = (e) => {
-    const targetedImgUrl = e.target.dataset.source;
-    const instance = basicLightbox.create(`     
-    <img src="${targetedImgUrl}" width="800" height="600">
-	`);
 
-    instance.show(
-        document.addEventListener('keydown', (e) => {
-            if (e.key && e.code === 'Escape') {
-                instance.close();
-            }
-        })
-    );
-};
-
-const onGalleryImgClick = (e) => {
-    if (e.target.nodeName !== 'IMG') return;
-
-    createLightboxInstance(e);
-    e.preventDefault();
-};
-
-galleryContainerRef.addEventListener('click', onGalleryImgClick);
+    const lightboxSlider = new SimpleLightbox('.gallery a', {
+        sourceAttr: 'href',
+        captions: true,
+        captionsData: 'title',
+        captionPosition: 'bottom',
+        captionDelay: 250,
+        loop: true,
+    });
 
 
 console.log(galleryItems);
