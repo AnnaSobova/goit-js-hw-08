@@ -1,7 +1,7 @@
 
-// import SimpleLightbox from "simplelightbox/dist/simple-lightbox.esm";  
+import SimpleLightbox from "simplelightbox/dist/simple-lightbox.esm";  
 // Plain ES Module without Babel
-import SimpleLightbox from "simplelightbox";
+// import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 // Add imports above this line
@@ -25,7 +25,7 @@ const makeGalleryItem = (arr) => {
         captions: true,
         captionsData: 'title',
         captionPosition: 'bottom',
-        captionDelay: 250,
+        // captionDelay: 250,
         loop: true,
     });
 
